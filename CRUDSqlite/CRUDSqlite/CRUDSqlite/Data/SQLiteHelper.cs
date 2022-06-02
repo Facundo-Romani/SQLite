@@ -18,7 +18,7 @@ namespace CRUDSqlite.Data
         }
            
 
-        // Insertar.
+        // Insertar o Actualizar.
         public Task<int> SaveAlumnoAsync(Alumno alum)
         {
             if (alum.IdAlumno != 0)
@@ -29,6 +29,12 @@ namespace CRUDSqlite.Data
             {
                 return db.InsertAsync(alum);
             }
+        }
+        
+        // Borrar.
+        public Task<int> DeleteAlumnoAsync(Alumno alumno) 
+        {
+            return db.DeleteAsync(alumno);
         }
 
         /// <summary>

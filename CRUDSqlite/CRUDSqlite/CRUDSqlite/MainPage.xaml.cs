@@ -32,14 +32,8 @@ namespace CRUDSqlite
                     Email = txtEmail.Text,
                 };
                 await App.SQLiteDB.SaveAlumnoAsync(alum);
-
-                txtNombre.Text = "";
-                txtApellidoPaterno.Text = "";
-                txtApellidoMaterno.Text = "";
-                txtEdad.Text = "";
-                txtEmail.Text = "";
-
                 await DisplayAlert("Registro", "Se guardo de manera exitosa el alumno", "Ok");
+                limpiarControles();
                 llenarDatos();
 
             }
@@ -99,6 +93,7 @@ namespace CRUDSqlite
             btnRegistrar.IsVisible = false;
             txtIdAlumno.IsVisible = true;
             btnActualizar.IsVisible = true;
+            btnEliminar.IsVisible = true;
 
             if (!string.IsNullOrEmpty(obj.IdAlumno.ToString()))
             {
@@ -131,20 +126,43 @@ namespace CRUDSqlite
 
                 await App.SQLiteDB.SaveAlumnoAsync(alumno);
                 await DisplayAlert("Registro", "Se Actualizo de manera exitosa el alumno", "ok");
-
-                txtIdAlumno.Text = "";
-                txtNombre.Text = "";
-                txtApellidoPaterno.Text = "";
-                txtApellidoMaterno.Text = "";
-                txtEdad.Text = "";
-                txtEmail.Text = "";
-
+                limpiarControles();
                 txtIdAlumno.IsVisible = false;
                 btnActualizar.IsVisible = false;
                 btnRegistrar.IsVisible = true;
                 llenarDatos();
 
             }
+        }
+
+        private async void btnEliminar_Clicked(object sender, EventArgs e)
+        {
+
+            var alumno = await App.SQLiteDB.GetAlumnoByIdAsync(Convert.ToInt32(txtIdAlumno.Text));
+
+            if (alumno != null)
+            {
+                await App.SQLiteDB.DeleteAlumnoAsync(alumno);
+                await DisplayAlert("Alumno", "Se elimino de manera exitosa", "ok");
+                limpiarControles();
+                llenarDatos();
+                txtIdAlumno.IsVisible = false;
+                btnActualizar.IsVisible = false;
+                btnEliminar.IsVisible = false;
+                btnRegistrar.IsVisible = true;
+            }
+        }
+
+
+        // Método para limpiar controles.
+        public void limpiarControles()
+        {
+            txtIdAlumno.Text = "";
+            txtNombre.Text = "";
+            txtApellidoPaterno.Text = "";
+            txtApellidoMaterno.Text = "";
+            txtEdad.Text = "";
+            txtEmail.Text = "";
         }
     }
 }

@@ -15,6 +15,7 @@
         <Entry x:Name="txtEmail" Placeholder="Email"/>
         <Button x:Name="btnRegistrar" Text="Registrar alumno" Clicked="btnRegistrar_Clicked"/>
         <Button x:Name="btnActualizar" Text="Actualizar" Clicked="btnActualizar_Clicked" IsVisible="false"/>
+        <Button x:Name="btnEliminar" Text="Eliminar" Clicked="btnEliminar_Clicked" IsEnabled="False"/>
         <ListView x:Name="LstAlumnos" ItemSelected="LstAlumnos_ItemSelected">
             <ListView.ItemTemplate>
                 <DataTemplate>
