@@ -14,6 +14,7 @@ namespace CRUDSqlite
         public MainPage()
         {
             InitializeComponent();
+            llenarDatos();
         }
 
 
@@ -120,16 +121,16 @@ namespace CRUDSqlite
             {
                 Alumno alumno = new Alumno()
                 {
-                    IdAlumno=Convert.ToInt32(txtIdAlumno.Text),
+                    IdAlumno = int.Parse(txtIdAlumno.Text),
                     Nombre = txtNombre.Text,
                     ApellidoPaterno = txtApellidoPaterno.Text,
                     ApellidoMaterno = txtApellidoMaterno.Text,
-                    Edad= Convert.ToInt32(txtEdad),
+                    Edad = int.Parse(txtEdad.Text),
                     Email = txtEmail.Text
                 };
 
                 await App.SQLiteDB.SaveAlumnoAsync(alumno);
-                await DisplayAlert("Registro", "Se Actualizo de manera exitosa el alumno" , "ok");
+                await DisplayAlert("Registro", "Se Actualizo de manera exitosa el alumno", "ok");
 
                 txtIdAlumno.Text = "";
                 txtNombre.Text = "";
@@ -137,17 +138,13 @@ namespace CRUDSqlite
                 txtApellidoMaterno.Text = "";
                 txtEdad.Text = "";
                 txtEmail.Text = "";
+
                 txtIdAlumno.IsVisible = false;
-                btnActualizar.IsVisible = true;
+                btnActualizar.IsVisible = false;
                 btnRegistrar.IsVisible = true;
                 llenarDatos();
-               
+
             }
-        }
-
-        private void btnActualizar_Clicked_1(object sender, EventArgs e)
-        {
-
         }
     }
 }

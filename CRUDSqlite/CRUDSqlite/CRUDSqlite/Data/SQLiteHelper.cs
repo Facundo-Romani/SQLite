@@ -16,7 +16,7 @@ namespace CRUDSqlite.Data
             db = new SQLiteAsyncConnection(dbPath);
             db.CreateTableAsync<Alumno>().Wait();
         }
-
+           
 
         // Insertar.
         public Task<int> SaveAlumnoAsync(Alumno alum)
